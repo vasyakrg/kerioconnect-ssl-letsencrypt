@@ -1,0 +1,51 @@
+variable "project" {
+  default = ""
+}
+
+variable "region" {
+  default = "us-central1"
+}
+
+variable "zone_instance" {
+  default = "us-central1-a"
+}
+
+variable "dns_zone_id" {
+  default = ""
+}
+
+variable "dns_zone_name" {
+  default = ""
+}
+
+variable "record_name" {
+  default = ""
+}
+
+variable "record_ip" {
+  default = ""
+}
+
+variable "disk_image" {
+  default = "ubuntu-1804-lts"
+}
+
+variable "machine_type" {
+  default = "n1-standard-1" # 1 CPU + 3,75 RAM - ~$25 monthly
+}
+
+variable "username" {
+  default = ""
+}
+
+variable "network_name" {
+  default = "default"
+}
+
+variable "net_tag" {
+  default = "kerio-connect"
+}
+
+variable "wget_kci_path" {
+  default = ""
+}

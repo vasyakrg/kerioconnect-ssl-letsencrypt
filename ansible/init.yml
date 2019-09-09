@@ -1,0 +1,21 @@
+- hosts: all
+  become: true
+  roles:
+    - nginx_install
+    - nginx_deploy
+
+  vars:
+    default_domain: "mail.domain.ru"
+    default_email: "info@domain.ru"
+
+    nginx_install_default_domain: "{{ default_domain }}"
+    nginx_install_default_kerio_port: 8843
+
+    nginx_deploy_letsencrypt_email: "{{ default_email }}"
+    nginx_deploy_vhosts:
+
+      - server_name: test1.domain.ru
+        state: present
+
+      - server_name: test2.domain.ru
+        state: present

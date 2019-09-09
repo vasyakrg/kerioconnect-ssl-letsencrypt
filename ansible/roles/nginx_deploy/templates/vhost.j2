@@ -1,0 +1,41 @@
+{% set nginx_deploy_vhosts = item.server_name %}
+# autocreate by ansible template
+
+server {
+       listen         80;
+       server_name    {{ nginx_deploy_vhosts }};
+       server_name_in_redirect off;
+       rewrite     ^ https://$server_name$request_uri? permanent;
+
+       location /.well-known/acme-challenge {
+           root /var/www/html;
+           try_files $uri $uri/ = 404;
+       }
+}
+
+server {
+    server_name {{ nginx_deploy_vhosts }};
+
+    listen      443 ssl;
+
+    access_log /var/log/nginx/{{ nginx_deploy_vhosts }}/access.log proxy;
+    error_log /var/log/nginx/{{ nginx_deploy_vhosts }}/error.log notice;
+
+    ssl on;
+    ssl_certificate /opt/kerio/mailserver/sslcert/{{ nginx_deploy_vhosts }}.crt;
+    ssl_certificate_key /opt/kerio/mailserver/sslcert/{{ nginx_deploy_vhosts }}.key;
+
+    location ~ /.well-known {
+        allow all;
+    }
+
+    location / {
+        proxy_pass                            https://localhost:8843;
+        proxy_set_header Host                 $host;
+        proxy_set_header X-Real-IP            $remote_addr;
+        proxy_set_header X-Forwarded-For      $proxy_add_x_forwarded_for;
+        proxy_set_header X-Remote-Port        $remote_port;
+        proxy_set_header X-Forwarded-Proto    $scheme;
+        proxy_redirect  off;
+    }
+}
