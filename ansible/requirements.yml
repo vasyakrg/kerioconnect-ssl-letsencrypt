@@ -1,0 +1,3 @@
+- name: kerio-letsencrypt
+  src: git+https://gitlab.amegaserver.com/roles-ansible/vasyakrg-kerio-letsencrypt.git
+  version: origin/master

@@ -1,9 +1,0 @@
-nginx_install_listen_http: 80
-nginx_install_listen_https: 443
-nginx_install_nginx_user: www-data
-nginx_install_worker_processes: auto
-nginx_install_worker_connections: 1024
-nginx_install_os_name: "{{ ansible_distribution }}"
-nginx_install_os_ver: "{{ ansible_distribution_version }}"
-nginx_install_default_domain: mail.default.local
-nginx_install_default_kerio_port: 8843

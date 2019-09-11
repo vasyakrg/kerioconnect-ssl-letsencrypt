@@ -1,21 +1,17 @@
 - hosts: all
   become: true
   roles:
-    - nginx_install
-    - nginx_deploy
+    - kerio-letsencrypt
 
   vars:
-    default_domain: "mail.domain.ru"
-    default_email: "info@domain.ru"
+    lets_letsencrypt_email: "info@aits.life"
+    lets_deploy_vhosts:
+      # - server_name: domain1.aits.life
+      #   state: present
 
-    nginx_install_default_domain: "{{ default_domain }}"
-    nginx_install_default_kerio_port: 8843
+      - server_name: domain2.aits.life
+        state: absent
 
-    nginx_deploy_letsencrypt_email: "{{ default_email }}"
-    nginx_deploy_vhosts:
-
-      - server_name: test1.domain.ru
-        state: present
-
-      - server_name: test2.domain.ru
-        state: present
+    # lets_dry_run: "--dry-run"
+    lets_dry_run: ""
+    lets_crontab_enable: "disable"
