@@ -11,8 +11,6 @@ resource "google_compute_firewall" "allow-ports" {
       "443",
       "80",
       "22",
-      "8800",
-      "8843",
       "4040",
     ]
   }
